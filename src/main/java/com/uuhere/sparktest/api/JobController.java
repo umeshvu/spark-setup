@@ -15,7 +15,10 @@ public class JobController {
 
     @GetMapping("/run-job")
     public String runJob() {
-        job.runJob("/path/to/input.csv", "/path/to/output");
-        return "Job submitted!";
+        String inputPath = "/data/input.csv";
+        String outputPath = "/data/output";
+
+        job.runJob(inputPath, outputPath);
+        return "Job submitted! Input=" + inputPath + " Output=" + outputPath;
     }
 }
