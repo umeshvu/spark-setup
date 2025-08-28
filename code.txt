@@ -1,0 +1,51 @@
+mkdir -p test_env/archive
+mkdir -p test_env/migration
+cd test_env
+
+
+cat > filterfile.txt <<EOF
+cardNumber,cycleDate
+1234567890,2025-07-01
+2233445566,2025-07-15
+3344556677,2025-07-20
+4455667788,2025-08-01
+EOF
+
+
+# Inside archive directory
+cd archive
+
+touch report_20250601.txt
+touch report_20250701.txt
+touch report_20250705.txt
+touch report_20250710.txt
+touch report_20250720.txt
+touch report_20250801.txt
+touch report_20250810.txt
+
+cd ..
+
+
+Expected Behavior
+
+Script reads filterfile.txt, finds oldest date = 2025-07-01
+
+Compares with today (say 2025-08-25)
+
+Files between 2025-07-01 and 2025-08-25 are:
+
+✅ report_20250701.txt
+
+✅ report_20250705.txt
+
+✅ report_20250710.txt
+
+✅ report_20250720.txt
+
+✅ report_20250801.txt
+
+✅ report_20250810.txt
+
+Those files get copied to migration/
+
+Finally, filterfile.txt itself gets moved to migration/
